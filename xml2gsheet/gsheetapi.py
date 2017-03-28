@@ -15,7 +15,7 @@ except ImportError:
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
-CLIENT_SECRET_FILE = 'static/client_secret.json'
+CLIENT_SECRET_FILE = '../static/client_secret.json'
 APPLICATION_NAME = 'Reestr'
 
 
@@ -29,11 +29,11 @@ def get_credentials():
         Credentials, the obtained credential.
     """
     home_dir = os.path.expanduser('~')
-    credential_dir = os.path.join(home_dir, 'static/.credentials')
+    credential_dir = os.path.join(home_dir, '.credentials')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
     credential_path = os.path.join(credential_dir,
-                                   'static/client_secret.json')
+                                   'client_secret.json')
 
     store = Storage(credential_path)
     credentials = store.get()
