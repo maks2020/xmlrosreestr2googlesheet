@@ -3,3 +3,6 @@ static/
 .DS_Store
 *.sublime-project
 *.json
+*.txt
+__pycache__/
+__init__.py
