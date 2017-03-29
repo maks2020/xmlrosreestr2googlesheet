@@ -12,6 +12,8 @@ try:
 except ImportError:
     flags = None
 
+from parse_xml import parse_xml
+
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
@@ -74,8 +76,11 @@ def main():
             # Print columns A and E, which correspond to indices 0 and 4.
             print('%s %s %s' % (row[0], row[1], row[2]))
 
-def add_row():
-    rangeName = 'Лист1!A:C'
+def add_row(file_xml):
+    rangeName = 'Лист1'
+
+    # file_xml = '../static/f_12558d97b1848950.xml'
+
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
@@ -84,15 +89,7 @@ def add_row():
                               discoveryServiceUrl=discoveryUrl)
 
     spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
-    values = [
-        [
-            # Cell values ...
-            'test1',
-            'test2',
-            'test3'
-        ],
-        # Additional rows ...
-    ]
+    values = parse_xml(file_xml)
     body = {
       'values': values
     }
