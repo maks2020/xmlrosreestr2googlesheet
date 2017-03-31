@@ -41,7 +41,6 @@ frame3 = Frame(root, bd=5)
 frame3.pack(side=TOP, fill=X)
 button_add_data = Button(frame3, width=30, text='Добавить данные',
                 font='arial 16', command=(lambda: xml2gsheet(data_app['work_dir'])))
-
 button_add_data.pack(side=RIGHT)
 root.title('Reestr')
 root.mainloop()
