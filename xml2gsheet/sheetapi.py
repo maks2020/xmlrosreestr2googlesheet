@@ -13,7 +13,7 @@ except ImportError:
     flags = None
 
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
-CLIENT_SECRET_FILE = '../static/client_secret.json'
+CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Reestr'
 
 def get_credentials():
@@ -88,3 +88,11 @@ def add_row_sheet(values):
     result = service.spreadsheets().values().append(
         spreadsheetId=spreadsheetId, valueInputOption = 'RAW', range=rangeName,
         body=body).execute()
+
+# list_new = [
+#                 [1,2,3,4],
+#                 [5,6,7,8],
+#                 [9,10,11,12]
+#             ]
+
+# add_row_sheet(list_new)
