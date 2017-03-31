@@ -2,6 +2,7 @@ env_pr03/
 static/
 .DS_Store
 *.sublime-project
+*.sublime-workspace
 *.json
 *.txt
 __pycache__/
