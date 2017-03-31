@@ -44,6 +44,6 @@ def parse_xml_tag(file):
     return [rec(root, str_cad_cost, cad_cost_val),
             date_create_row]
 
-file_xml = '../static/kp_c77cb5e8-da19-43f7-8f0e-07e9f668d6ad.xml'
+#file_xml = '../static/kp_c77cb5e8-da19-43f7-8f0e-07e9f668d6ad.xml'
 
-print(parse_xml_tag(file_xml))
+#print(parse_xml_tag(file_xml))
