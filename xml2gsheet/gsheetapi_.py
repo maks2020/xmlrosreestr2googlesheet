@@ -12,10 +12,12 @@ try:
 except ImportError:
     flags = None
 
+# from parse_xml import parse_xml
+
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
-CLIENT_SECRET_FILE = 'client_secret.json'
+CLIENT_SECRET_FILE = '../static/client_secret.json'
 APPLICATION_NAME = 'Reestr'
 
 
@@ -49,7 +51,6 @@ def get_credentials():
 
 def main():
     """Shows basic usage of the Sheets API.
-
     Creates a Sheets API service object and prints the names and majors of
     students in a sample spreadsheet:
     https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
@@ -72,10 +73,10 @@ def main():
         print('Column1, Column2, Column3')
         for row in values:
             # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s %s %s' % (row[0], row[1], row[2]))
+            print('%s %s %s %s' % (row[0], row[1], row[2], row[3]))
 
-def add_row():
-    rangeName = 'Лист1!A:C'
+def add_row(values):
+    rangeName = 'Лист1'
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
@@ -84,23 +85,12 @@ def add_row():
                               discoveryServiceUrl=discoveryUrl)
 
     spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
-    values = [
-        [
-            # Cell values ...
-            'test1',
-            'test2',
-            'test3'
-        ],
-        # Additional rows ...
-    ]
     body = {
       'values': values
     }
     result = service.spreadsheets().values().append(
         spreadsheetId=spreadsheetId, valueInputOption = 'RAW', range=rangeName,
         body=body).execute()
-
-
 
 if __name__ == '__main__':
     add_row()

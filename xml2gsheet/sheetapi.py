@@ -12,14 +12,9 @@ try:
 except ImportError:
     flags = None
 
-from parse_xml import parse_xml
-
-# If modifying these scopes, delete your previously saved credentials
-# at ~/.credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
 CLIENT_SECRET_FILE = '../static/client_secret.json'
 APPLICATION_NAME = 'Reestr'
-
 
 def get_credentials():
     """Gets valid user credentials from storage.
@@ -49,7 +44,8 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def main():
+
+def get_values_sheet():
     """Shows basic usage of the Sheets API.
 
     Creates a Sheets API service object and prints the names and majors of
@@ -64,23 +60,20 @@ def main():
                               discoveryServiceUrl=discoveryUrl)
 
     spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
-    rangeName = 'Лист1!A1:C'
+    rangeName = 'Лист1!A1:D'
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheetId, range=rangeName).execute()
     values = result.get('values', [])
+    # res = ''
     if not values:
         print('No data found.')
+        result = None
     else:
-        print('Column1, Column2, Column3')
-        for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s %s %s' % (row[0], row[1], row[2]))
+        result = values
+    return values
 
-def add_row(file_xml):
+def add_row_sheet(values):
     rangeName = 'Лист1'
-
-    # file_xml = '../static/f_12558d97b1848950.xml'
-
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
@@ -89,14 +82,9 @@ def add_row(file_xml):
                               discoveryServiceUrl=discoveryUrl)
 
     spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
-    values = parse_xml(file_xml)
     body = {
       'values': values
     }
     result = service.spreadsheets().values().append(
         spreadsheetId=spreadsheetId, valueInputOption = 'RAW', range=rangeName,
         body=body).execute()
-
-if __name__ == '__main__':
-    add_row()
-    main()
