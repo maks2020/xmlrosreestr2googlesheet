@@ -1,0 +1,9 @@
+env_gsheet/
+static/
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+*.json
+*.txt
+__pycache__/
+__init__.py
