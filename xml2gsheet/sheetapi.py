@@ -88,3 +88,14 @@ def add_row_sheet(values):
     result = service.spreadsheets().values().append(
         spreadsheetId=spreadsheetId, valueInputOption = 'RAW', range=rangeName,
         body=body).execute()
+<<<<<<< HEAD
+=======
+
+# list_new = [
+#                 [1,2,3,4],
+#                 [5,6,7,8],
+#                 [9,10,11,12]
+#             ]
+
+# add_row_sheet(list_new)
+>>>>>>> ccd20d1f2e9303465a120723133eabfa9884cbb5

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 env_gsheet/
+=======
+env_pr03/
+>>>>>>> ccd20d1f2e9303465a120723133eabfa9884cbb5
 static/
 .DS_Store
 *.sublime-project
