@@ -12,7 +12,9 @@ try:
 except ImportError:
     flags = None
 
-SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
+#SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
+
+SCOPES = 'https://www.googleapis.com/auth/drive'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Reestr'
 
@@ -59,7 +61,9 @@ def get_values_sheet():
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+    #spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+
+    spreadsheetId = '1BswqHEDqiJRAe5POzH4Ybv8tYqYI_Zt-YwMtT7AX1v4'
     rangeName = 'Лист1!A1:D'
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheetId, range=rangeName).execute()
@@ -81,7 +85,8 @@ def add_row_sheet(values):
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+    #spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+    spreadsheetId = '1BswqHEDqiJRAe5POzH4Ybv8tYqYI_Zt-YwMtT7AX1v4'
     body = {
       'values': values
     }
