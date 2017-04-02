@@ -31,7 +31,6 @@ def get_credentials():
         os.makedirs(credential_dir)
     credential_path = os.path.join(credential_dir,
                                    'client_secret.json')
-
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
@@ -59,7 +58,9 @@ def get_values_sheet():
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+    # spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+    spreadsheetId = '1ILHpTkdm_dOCORk2g8LmWCllnaua2K09LFzTJ0OvBTQ'
+
     rangeName = 'Лист1!A1:D'
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheetId, range=rangeName).execute()
@@ -70,7 +71,7 @@ def get_values_sheet():
         result = None
     else:
         result = values
-    return values
+    return result
 
 def add_row_sheet(values):
     rangeName = 'Лист1'
@@ -81,7 +82,9 @@ def add_row_sheet(values):
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+    # spreadsheetId = '1eYrCOocnLWCibBPfHPMibBbxclijUof7kUfP6QL0ZWg'
+    spreadsheetId = '1ILHpTkdm_dOCORk2g8LmWCllnaua2K09LFzTJ0OvBTQ'
+    # spreadsheetId = '1DMQBMDfLClilTfIY4sahb83WL3phTk60kcIYvlrxJqU'
     body = {
       'values': values
     }
@@ -89,10 +92,12 @@ def add_row_sheet(values):
         spreadsheetId=spreadsheetId, valueInputOption = 'RAW', range=rangeName,
         body=body).execute()
 
-# list_new = [
-#                 [1,2,3,4],
-#                 [5,6,7,8],
-#                 [9,10,11,12]
-#             ]
+if __name__ == '__main__':
 
-# add_row_sheet(list_new)
+    list_new = [
+                [1,2,3,4],
+                [5,6,7,8],
+                [9,10,11,12]
+                ]
+
+    add_row_sheet(list_new)
