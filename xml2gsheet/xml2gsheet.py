@@ -1,7 +1,9 @@
 import os
 from datetime import datetime as dt
+
 from sheetapi import add_row_sheet
 from parse_xml import parse_xml_attr, parse_xml_tag
+from srch_cad_num import srch_same
 
 def xml2gsheet(path_files):
     today = dt.now()
@@ -25,4 +27,4 @@ def xml2gsheet(path_files):
             #         storege_file.write(file + '\n')
             # else:
             #     continue
-        add_row_sheet(rows_val)
+        add_row_sheet(srch_same(rows_val))

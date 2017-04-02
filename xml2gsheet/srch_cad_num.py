@@ -10,3 +10,12 @@ def srch_cad_num(srch_num):
                      % (row[0], row[1], row[2], row[3]))
     return res
 
+def srch_same(list_file):
+    rows_gsheet = get_values_sheet()
+    temp_list = list_file[:]
+    for row_new in temp_list:
+        for row_gsheet in rows_gsheet:
+            if row_new[0] in row_gsheet:
+                list_file.remove(row_new)
+    return list_file
+
