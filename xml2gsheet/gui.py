@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter.messagebox import showinfo
 from tkinter.filedialog import askdirectory
+from time import sleep
+
 from srch_cad_num import srch_cad_num
 from xml2gsheet import xml2gsheet
-from time import sleep
 
 def inf(cad_num):
     showinfo(title='Результат поиска кадастрового номера',
