@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter.messagebox import showinfo
 from tkinter.filedialog import askdirectory
+from time import sleep
+
 from srch_cad_num import srch_cad_num
 from xml2gsheet import xml2gsheet
-from time import sleep
 
 def inf(cad_num):
     showinfo(title='Результат поиска кадастрового номера',
@@ -37,7 +38,7 @@ var = StringVar()
 var.set('Выберете директорию c XML файлами ==>')
 Label(frame2, textvariable = var, font='arial 12').pack(side=LEFT)
 button2 = Button(frame2, width=30, text='Выбрать',
-                font='arial 12', command=dir_start) # for Windows add initialdir='c:\\'
+                font='arial 12', command=(lambda: dir_start())) # for Windows add initialdir='c:\\'
 button2.pack(side=RIGHT)
 
 
