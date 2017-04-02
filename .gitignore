@@ -7,3 +7,4 @@ static/
 *.txt
 __pycache__/
 __init__.py
+.idea/
