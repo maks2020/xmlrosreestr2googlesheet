@@ -15,28 +15,14 @@ def parse_xml_attr(file):
             else:
                 if rec(child, str_search) != '':
                     res_func = (rec(child, str_search))
-        return res_func
-<<<<<<< HEAD
-    # now = datetime.now()
-    # date_create_row = '%d-%d-%d / %d:%d' % (now.day, now.month, now.year,
-    #                                         now.hour, now.minute)
-=======
->>>>>>> ccd20d1f2e9303465a120723133eabfa9884cbb5
     return [rec(root, str_cad_num),
             rec(root, date_create)]
 
 def parse_xml_tag(file):
     tree = ET.parse(file)
     root = tree.getroot()
-<<<<<<< HEAD
-    # str_cad_num = 'CadastralNumber'
     str_cad_cost = 'CadastralCost'
     cad_cost_val = 'Value'
-    # date_create = 'DateCreated'
-=======
-    str_cad_cost = 'CadastralCost'
-    cad_cost_val = 'Value'
->>>>>>> ccd20d1f2e9303465a120723133eabfa9884cbb5
     def rec(root_item, str_tag, str_attrib):
         res_func = ''
         for child in root_item:
@@ -52,12 +38,9 @@ def parse_xml_tag(file):
     return [rec(root, str_cad_cost, cad_cost_val),
             date_create_row]
 
-<<<<<<< HEAD
-#file_xml = '../static/kp_c77cb5e8-da19-43f7-8f0e-07e9f668d6ad.xml'
 
-#print(parse_xml_tag(file_xml))
-=======
-# file_xml = '../static/kp_c77cb5e8-da19-43f7-8f0e-07e9f668d6ad.xml'
+if __name__=='__main__':
 
-# print(parse_xml_attr(file_xml))
->>>>>>> ccd20d1f2e9303465a120723133eabfa9884cbb5
+    file_xml = '../static/kp_c77cb5e8-da19-43f7-8f0e-07e9f668d6ad.xml'
+
+    print(parse_xml_attr(file_xml))

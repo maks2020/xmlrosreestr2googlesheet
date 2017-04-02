@@ -8,6 +8,8 @@ static/
 *.sublime-project
 *.sublime-workspace
 *.json
-*.txt
 __pycache__/
 __init__.py
+.idea/
+*.html
+*.swp
