@@ -1,0 +1,13 @@
+env_xml2gsheet/
+static/
+dist/
+build/
+.DS_Store
+*.json
+*.txt
+__pycache__/
+__init__.py
+.idea/
+*.html
+*_.py
+*.bat
