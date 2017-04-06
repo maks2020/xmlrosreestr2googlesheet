@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['gui_main.py'],
+a = Analysis(['reestr.py'],
              pathex=['C:\\Users\\maks2020\\projects\\xml_in_gsheet\\xml2gsheet',
              r'C:\Users\maks2020\projects\xml_in_gsheet\env_xml2gsheet\Lib\site-packages',
              r'C:\Users\maks2020\projects\xml_in_gsheet\static'],
@@ -34,15 +34,15 @@ pyz = PYZ(a.pure, a.zipped_data,
 exe = EXE(pyz,
           a.scripts,
           exclude_binaries=True,
-          name='gui_main',
+          name='Reestr',
           debug=False,
           strip=False,
           upx=True,
-          console=True )
+          console=False )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
                upx=True,
-               name='gui_main')
+               name='Reestr')

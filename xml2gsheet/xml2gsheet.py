@@ -8,7 +8,7 @@ from srch_utils import srch_same
 
 
 def if_not_exist():
-    files_static = os.listdir('../static')
+    files_static = os.listdir('static')
     if 'project.json' not in files_static:
         login, passwd = login_gui()
         gbot(login, passwd)

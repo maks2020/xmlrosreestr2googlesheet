@@ -6,7 +6,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 def autoz():
-    CREDENTIALS_FILE = '../static/project.json'  # имя файла с закрытым ключом
+    CREDENTIALS_FILE = 'static/project.json'  # имя файла с закрытым ключом
     credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE,
                                                                    ['https://www.googleapis.com/auth/spreadsheets',
                                                                     'https://www.googleapis.com/auth/drive'])
@@ -21,7 +21,7 @@ def drive_service(email_user, spreadsheet_dic):
     driveService = discovery.build('drive', 'v3', http=httpAuth)
     shareRes = driveService.permissions().create(
         fileId=spreadsheet_dic['spreadsheetId'],
-        body={'type': 'user', 'role': 'writer', 'emailAddress': email_user},  # доступ на чтение кому угодно
+        body={'type': 'user', 'role': 'writer', 'emailAddress': email_user},
         fields='id'
     ).execute()
 
@@ -34,8 +34,9 @@ def create_file(email_user):
         'sheets': [{'properties': {'sheetType': 'GRID',
                                    'sheetId': 0,
                                    'title': sheet_list,
-                                   'gridProperties': {'rowCount': 999, 'columnCount': 4}}}]
+                                   'gridProperties': {'rowCount': 999, 'columnCount': 4}}}],
     }).execute()
+
 
     drive_service(email_user, spreadsheet)
 
@@ -54,12 +55,33 @@ def create_file(email_user):
     result = service.spreadsheets().values().append(
         spreadsheetId=spreadsheet['spreadsheetId'], valueInputOption = 'RAW', range=sheet_list,
         body=body).execute()
-    with open('../static/reestr_config.json', 'w') as output_file:
+
+    dem_res = service.spreadsheets().batchUpdate(spreadsheetId = spreadsheet['spreadsheetId'], body = {
+
+        'requests': [{"updateDimensionProperties": {
+                            "range": {
+                                "sheetId": 0,
+                                "dimension": "COLUMNS",
+                                "startIndex": 0,
+                                "endIndex": 4
+                            },
+                            "properties": {
+                                "pixelSize": 165
+                            },
+                            "fields": "pixelSize"
+                        }
+                    }
+
+        ]
+
+    }).execute()
+
+    with open('static/reestr_config.json', 'w') as output_file:
         json.dump(spreadsheet, output_file)
 
 
 def read_config():
-    with open('../static/reestr_config.json') as input_file:
+    with open('static/reestr_config.json') as input_file:
         spreadsheet = json.load(input_file)
     return spreadsheet
 
@@ -108,4 +130,4 @@ def add_row_sheet(values):
 
 if __name__ == '__main__':
 
-    create_file('kroti1972@gmail.com')
+    create_file('your_email_google')

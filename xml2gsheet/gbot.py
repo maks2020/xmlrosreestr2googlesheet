@@ -13,7 +13,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from parser_html import parser_nm_prj
 
 def driver_init():
-    PATH_GECKODRIVER = '../static/chromedriver'
+
+    if  sys.platform == 'win32':
+        PATH_GECKODRIVER = 'static/chromedriver32'
+    else:
+        PATH_GECKODRIVER = 'static/chromedriver64'
+
     driver = webdriver.Chrome(PATH_GECKODRIVER)
     return driver
 
@@ -46,12 +51,12 @@ def but_submit(By_SEL, sel_str, driver):
 def gbot(login_str, pswd_str):
     driver = driver_init()
     int_rndm = random.randrange(10000, 99999)
-    # prj_name = 'project%s' % int_rndm
+    prj_name = 'project%s' % int_rndm
 
     # Get page create project
     url = 'https://console.developers.google.com/projectselector/apis/credentials?hl=RU'
     # uncomment url and inter name project if need create key in exist project
-    url = 'https://console.developers.google.com/apis/credentials/serviceaccountkey?project=project88490'
+    # url = 'https://console.developers.google.com/apis/credentials/serviceaccountkey?project=<your_project>'
     driver.get(url)
 
     # Login in account
@@ -67,26 +72,26 @@ def gbot(login_str, pswd_str):
     # Begin commment if need create key in exist project
     #=============================
     # Create name project
-    # but_rad_click(By.LINK_TEXT, 'Создать проект', driver)
-    # field_in(By.NAME, 'name', prj_name, driver)
-    # xpath_crt_prj = '//*[@id="p6n-project-creation-dialog-ok-button"]'
-    # but_rad_click(By.XPATH, xpath_crt_prj, driver)
-    #
-    # # Choice kind of account
-    # time.sleep(10)
-    # xpath_chc_knd_accnt = ('/html/body/div[2]/div[2]/div[3]/'
-    #                    'div[1]/div/md-content/div/div[2]/'
-    #                    'div/div[3]/div[2]/div/div')
-    # but_rad_click(By.XPATH, xpath_chc_knd_accnt, driver)
-    # xpath_knd_accnt = ('/html/body/div[2]/div[2]/div[3]/'
-    #                        'div[1]/div/md-content/div/div[2]/'
-    #                        'div/div[3]/div[2]/div/div/div/section[1]/'
-    #                        'div/div/div[1]/div[3]')
-    # but_rad_click(By.XPATH, xpath_knd_accnt, driver)
-    # # End comment
-    #=====================================
+    but_rad_click(By.LINK_TEXT, 'Создать проект', driver)
+    field_in(By.NAME, 'name', prj_name, driver)
+    xpath_crt_prj = '//*[@id="p6n-project-creation-dialog-ok-button"]'
+    but_rad_click(By.XPATH, xpath_crt_prj, driver)
 
-    prj_name = 'project88490'
+    # Choice kind of account
+    time.sleep(10)
+    xpath_chc_knd_accnt = ('/html/body/div[2]/div[2]/div[3]/'
+                       'div[1]/div/md-content/div/div[2]/'
+                       'div/div[3]/div[2]/div/div')
+    but_rad_click(By.XPATH, xpath_chc_knd_accnt, driver)
+    xpath_knd_accnt = ('/html/body/div[2]/div[2]/div[3]/'
+                           'div[1]/div/md-content/div/div[2]/'
+                           'div/div[3]/div[2]/div/div/div/section[1]/'
+                           'div/div/div[1]/div[3]')
+    but_rad_click(By.XPATH, xpath_knd_accnt, driver)
+
+    # prj_name = 'your_project'
+    # End comment
+    #=====================================
 
     #get new service account
     time.sleep(10)
@@ -196,17 +201,19 @@ def gbot(login_str, pswd_str):
 
 
 def copy_key(name_file):
+
     if sys.platform == 'darwin' or sys.platform == 'linux':
         src = os.environ['HOME'] + '/Downloads/%s' % name_file
-        dist = '../static/project.json'
+        dist = 'static/project.json'
         shutil.copy2(src, dist)
     elif sys.platform == 'win32':
         src = os.environ['HOMEPATH'] + '\\Downloads\\%s' % name_file
-        dist = '..\\static\\project.json'
+        dist = 'static\\project.json'
         shutil.copy2(src, dist)
     return None
 
 if __name__ == '__main__':
+
     import getpass
     login = input('Input login: ')
     passwd = getpass.getpass('Input passwd: ')

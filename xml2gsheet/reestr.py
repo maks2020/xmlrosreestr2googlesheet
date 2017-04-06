@@ -86,12 +86,12 @@ def gui_rstr():
 
 
 def if_not_exist():
-    files_static = os.listdir('../static')
+    files_static = os.listdir('static')
     if 'project.json' not in files_static:
         login, passwd = login_gui()
         gbot(login, passwd)
     if 'reestr_config.json' not in files_static:
-        create_file(email_usr_gui())
+            create_file(email_usr_gui())
     return None
 
 
@@ -111,6 +111,9 @@ def func_main(dict_data):
 
 
 if __name__ == '__main__':
-    while True:
-        data_app = gui_rstr()
-        func_main(data_app)
+    try:
+        while True:
+            data_app = gui_rstr()
+            func_main(data_app)
+    except:
+        pass

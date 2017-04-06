@@ -14,7 +14,7 @@ def srch_cad_num(srch_num):
 
 def srch_same(list_file):
     now = datetime.now()
-    with open('../static/log.txt', 'a')  as output_file:
+    with open('static/log.txt', 'a')  as output_file:
         output_file.write('Добавление %d-%d-%d / %d : 0%d\n' %
                           (now.day, now.month, now.year,
                             now.hour, now.minute))
@@ -24,10 +24,10 @@ def srch_same(list_file):
         for row_new in temp_list:
             for row_gsheet in rows_gsheet:
                 if row_new[0] in row_gsheet:
-                    with open('../static/log.txt', 'a')  as output_file:
+                    with open('static/log.txt', 'a')  as output_file:
                         output_file.write('%s - есть в реестре\n' % row_new[0])
                     list_file.remove(row_new)
-    with open('../static/log.txt', 'a')  as output_file:
+    with open('static/log.txt', 'a')  as output_file:
         for row_new in list_file:
             output_file.write('%s - добавлено в реестр\n' % row_new[0])
     return list_file
